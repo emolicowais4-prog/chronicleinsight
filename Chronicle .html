@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chronicle Insight | Articles & Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Chronicle Insight – a space for essays, research notes, and reflections across history, society, and culture."
+  />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --card-bg: #101528;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+      --max-width: 960px;
+      --transition: 0.22s ease;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.75),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      border-color: rgba(148, 163, 184, 0.4);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 40px 0 10px;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      line-height: 1.1;
+      margin: 0 0 8px;
+    }
+
+    .hero-subtitle {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin: 0 0 16px;
+    }
+
+    .posts-section {
+      padding: 10px 0 32px;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .post-card {
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .post-card::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(
+        circle at top right,
+        rgba(249, 115, 22, 0.4),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: var(--transition);
+      z-index: -1;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(249, 115, 22, 0.7);
+    }
+
+    .post-card:hover::before {
+      opacity: 1;
+    }
+
+    .post-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .post-tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #fed7aa;
+    }
+
+    .post-title {
+      font-size: 1.02rem;
+      margin: 4px 0 6px;
+    }
+
+    .post-title button {
+      all: unset;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .post-title button:hover {
+      text-decoration: underline;
+    }
+
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+
+    .post-readmore {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #fed7aa;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .post-readmore span {
+      font-size: 1.1rem;
+      transform: translateY(1px);
+    }
+
+    .info-section {
+      padding: 24px 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .info-section h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .info-section p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .article-viewer {
+      padding: 32px 0 40px;
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .article-header h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.7rem, 3vw, 2rem);
+    }
+
+    .article-meta {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .article-tag {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #fef3c7;
+    }
+
+    .article-content {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 20px 18px;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.97rem;
+    }
+
+    .article-content h2,
+    .article-content h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.4em;
+    }
+
+    .article-content p {
+      margin: 0 0 0.8em;
+    }
+
+    .site-footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 14px 0 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        gap: 12px;
+      }
+
+      .nav-links {
+        gap: 10px;
+        font-size: 0.8rem;
+      }
+
+      .article-content {
+        padding: 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">Chronicle<span>Insight</span></div>
+      <nav class="nav-links">
+        <a href="#top" class="active">Home</a>
+        <a href="#sections">Sections</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <h1>Chronicle Insight</h1>
+          <p class="hero-subtitle">
+            Essays, research notes, and reflections from the world of history,
+            society, and ideas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="posts-section">
+      <div class="container">
+        <h2 class="section-title">Latest Articles</h2>
+        <div id="posts-grid" class="posts-grid">
+          <!-- Cards filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="sections" class="info-section">
+      <div class="container">
+        <h2>Sections</h2>
+        <p>
+          <strong>Essays</strong> – longer analytical pieces. <br />
+          <strong>Research Notes</strong> – brief observations, archival notes,
+          fieldwork snippets. <br />
+          <strong>Commentary</strong> – responses to debates, texts, and
+          historiography.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="info-section">
+      <div class="container">
+        <h2>About Chronicle Insight</h2>
+        <p>
+          Chronicle Insight is an independent space for historically grounded
+          writing. It brings together short and long-form pieces that trace
+          processes, places, and people across time.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="info-section">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>
+          For queries, collaborations, or comments, write to:
+          <a href="mailto:youremail@example.com">youremail@example.com</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="article-viewer" class="article-viewer">
+      <div class="container">
+        <header class="article-header">
+          <h1 id="article-title">Welcome to Chronicle Insight</h1>
+          <p class="article-meta">
+            <span id="article-date">30 November 2025</span>
+            ·
+            <span id="article-tag" class="article-tag">Introduction</span>
+          </p>
+        </header>
+        <div id="article-content" class="article-content">
+          <p>
+            Chronicle Insight is a space for historically grounded writing:
+            essays, research notes, and reflections that move between texts,
+            archives, landscapes, and everyday life.
+          </p>
+          <p>
+            This brief note simply opens the space. Over time, this site will
+            host work-in-progress pieces, shorter reflections, and longer essays
+            that trace processes, places, and people across time.
+          </p>
+          <p>
+            You can use this first article as a placeholder and later replace or
+            expand it as the project grows.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Chronicle Insight. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const posts = [
+      {
+        title: "Welcome to Chronicle Insight",
+        date: "30 November 2025",
+        tag: "Introduction",
+        excerpt:
+          "A brief note on what Chronicle Insight is about and how this space will be used for essays and research notes.",
+        content: `
+          <p>
+            Chronicle Insight is a space for historically grounded writing:
+            essays, research notes, and reflections that move between texts,
+            archives, landscapes, and everyday life.
+          </p>
+          <p>
+            This brief note simply opens the space. Over time, this site will
+            host work-in-progress pieces, shorter reflections, and longer essays
+            that trace processes, places, and people across time.
+          </p>
+          <p>
+            You can use this first article as a placeholder and later replace or
+            expand it as the project grows.
+          </p>
+        `,
+      },
+    ];
+
+    const postsGrid = document.getElementById("posts-grid");
+    const yearSpan = document.getElementById("year");
+    const articleTitle = document.getElementById("article-title");
+    const articleDate = document.getElementById("article-date");
+    const articleTag = document.getElementById("article-tag");
+    const articleContent = document.getElementById("article-content");
+
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    function openArticle(index) {
+      const post = posts[index];
+      articleTitle.textContent = post.title;
+      articleDate.textContent = post.date;
+      articleTag.textContent = post.tag;
+      articleContent.innerHTML = post.content;
+      document
+        .getElementById("article-viewer")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (postsGrid) {
+      if (!posts.length) {
+        postsGrid.innerHTML =
+          '<p style="color:#9ca3af;font-size:0.9rem;">No articles yet.</p>';
+      } else {
+        postsGrid.innerHTML = posts
+          .map(
+            (post, index) => `
+        <article class="post-card">
+          <div class="post-meta">
+            <span>${post.date}</span>
+            <span>·</span>
+            <span class="post-tag">${post.tag}</span>
+          </div>
+          <h3 class="post-title">
+            <button onclick="openArticle(${index})">${post.title}</button>
+          </h3>
+          <p class="post-excerpt">${post.excerpt}</p>
+          <div class="post-readmore" onclick="openArticle(${index})">
+            Read article <span>→</span>
+          </div>
+        </article>
+      `
+          )
+          .join("");
+      }
+    }
+  </script>
+</body>
+</html>
