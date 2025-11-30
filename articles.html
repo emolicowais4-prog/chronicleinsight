@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About | Chronicle Insight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="About Chronicle Insight – an academic space for essays, research notes, and commentary."
+  />
+  <style>
+    /* same base styles as articles page (shortened) */
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --card-bg: #101528;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.15);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+      --radius-xl: 24px;
+      --radius-pill: 999px;
+      --transition: 0.2s ease;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 16px 48px;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.85)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      gap: 12px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 1rem;
+    }
+    .logo span { color: var(--accent); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      font-size: 0.9rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .nav-links a.active {
+      color: var(--text);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .search-form {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+    }
+    .search-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      width: 120px;
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-btn {
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .search-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5);
+    }
+    @media (max-width: 720px) {
+      .header-inner { flex-wrap: wrap; justify-content: center; }
+      .nav-right { flex-wrap: wrap; justify-content: center; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    .page-header {
+      padding: 32px 0 16px;
+    }
+    .page-kicker {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .page-title {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      margin: 0 0 10px;
+    }
+    .page-subtitle {
+      margin: 0 0 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 580px;
+    }
+
+    .about-card {
+      background: radial-gradient(circle at top left, #111827, #020617 70%);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .about-card h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .about-card p {
+      margin: 0 0 12px;
+    }
+    .about-card ul {
+      margin: 0 0 12px 18px;
+      padding: 0;
+    }
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.8);
+      margin-top: 40px;
+      padding: 18px 0 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">CHRONICLE<span>INSIGHT</span></div>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="articles.html">Articles</a>
+          <a href="about.html" class="active">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <form class="search-form" action="articles.html" method="get">
+          <input
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Search articles…"
+          />
+          <button class="search-btn" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header">
+      <div class="page-kicker">About</div>
+      <h1 class="page-title">What is Chronicle Insight?</h1>
+      <p class="page-subtitle">
+        A personal yet scholarly space where drafts, notes, and essays can live
+        together without the pressure of formal publication.
+      </p>
+    </header>
+
+    <section class="about-card">
+      <h2>Purpose</h2>
+      <p>
+        Chronicle Insight is designed as a working notebook in public view: a place
+        to park half-formed ideas, fieldwork snippets, and more polished essays
+        around history, society, and culture.
+      </p>
+
+      <h2>What will appear here?</h2>
+      <ul>
+        <li>Longer analytical essays and arguments.</li>
+        <li>Research notes drawn from archives, fieldwork, and reading.</li>
+        <li>Commentary on historiography, debates, and sources.</li>
+      </ul>
+
+      <h2>Audience</h2>
+      <p>
+        The imagined readers include students of history, colleagues, and anyone
+        curious about how historical work is actually done – including its
+        hesitations, dead-ends, and revisions.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Chronicle Insight · About.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
