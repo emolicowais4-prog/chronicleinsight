@@ -101,5 +101,30 @@
 
     renderPosts();
   </script>
+  <script>
+  fetch("posts.json")
+    .then(response => response.json())
+    .then(posts => {
+      const container = document.getElementById("articles-container");
+
+      if (!posts.length) {
+        container.innerHTML = "<p style='color:#9ca3af'>No articles yet.</p>";
+        return;
+      }
+
+      container.innerHTML = posts
+        .map(
+          post => `
+          <article class="post-card">
+            <h2>${post.title}</h2>
+            <p>${post.date}</p>
+            <p>${post.excerpt}</p>
+          </article>
+        `
+        )
+        .join("");
+    })
+    .catch(err => console.error(err));
+  </script>
 </body>
 </html>
